@@ -1,6 +1,6 @@
 import asyncio
 import itertools
-from typing import List
+from typing import List, Dict
 from dataclasses import dataclass
 
 import aiohttp
@@ -108,7 +108,7 @@ class CrawlerDataImport(object):
 
         return instance
 
-    def execute(self, products: List[CrawlerResponse]) -> None:
+    def execute(self, products: List[CrawlerResponse]) -> Dict[str, int]:
         create, update = [], []
 
         for item in products:
@@ -122,3 +122,8 @@ class CrawlerDataImport(object):
 
         for instance in update:
             instance.save()
+
+        return {
+            'created': len(create),
+            'updated': len(update)
+        }

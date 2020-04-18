@@ -30,4 +30,3 @@ class CompareViewSet(viewsets.GenericViewSet):
         return Response(
             data={'similarity': result}
         )
-

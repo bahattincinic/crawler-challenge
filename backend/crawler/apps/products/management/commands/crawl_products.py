@@ -5,7 +5,7 @@ from products.crawler import Crawler, CrawlerDataImport
 
 class Command(BaseCommand):
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options) -> None:
         crawler = Crawler()
         products = crawler.execute()
 
@@ -14,8 +14,10 @@ class Command(BaseCommand):
         )
 
         importer = CrawlerDataImport()
-        importer.execute(products)
+        results = importer.execute(products)
 
         self.stdout.write(
-            self.style.SUCCESS("Import has been completed.")
+            self.style.SUCCESS(f"Import has been completed. "
+                               f"Updated {results['updated']} products, "
+                               f"Created {results['created']} products.")
         )
