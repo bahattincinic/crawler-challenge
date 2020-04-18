@@ -1,18 +1,15 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
-const Product = ({ name, image,  updatedAt}) => {
-  return (
-    <Card>
-      <Image src={image} wrapped ui={false} />
-      <Card.Header>{name}</Card.Header>
-      <Card.Meta>
-        <span className='date'>Last updated in {updatedAt}</span>
-      </Card.Meta>
-    </Card>
-  );
-};
+
+const Product = ({ name, image,  updatedAt }) => (
+  <Card
+    image={image}
+    header={name}
+    description={`Last updated in ${updatedAt}`}
+  />
+);
 
 Product.propTypes = {
   name: PropTypes.string.isRequired,

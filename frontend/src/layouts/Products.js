@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Header, Grid } from 'semantic-ui-react';
 import Product from '../components/Product';
+import useProduct from '../hooks/useProduct';
 
 import './Products.css';
-import CompareForm from "../components/CompareForm";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/v1/products/")
-      .then(response => response.json())
-      .then(json => setProducts(json));
-  }, []);
+  const products = useProduct();
 
   return (
     <div>
       <div className="Products-header">
-        <Header as='h2'>Product Compare</Header>
-      </div>
-
-      <CompareForm products={products} />
-
-      <div className="Products-header">
-        <Header as='h2'>Product List</Header>
+        <Header as='h1'>Product List</Header>
       </div>
       <Grid columns={3}>
         <Grid.Row>
