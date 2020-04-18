@@ -16,6 +16,20 @@ services:
     tty: true
     stdin_open: true
 
+  frontend:
+    build: ./frontend
+    restart: on-failure
+    container_name: frontend
+    links:
+      - djangoapp
+    ports:
+      - 3000:3000
+    volumes:
+      - "./frontend:/app"
+    command: bash -c "yarn start"
+    tty: true
+    stdin_open: true
+
   db:
     image: postgres:11.5
     container_name: db

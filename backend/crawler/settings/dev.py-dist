@@ -10,3 +10,5 @@ INSTALLED_APPS += (
 )
 
 DATABASES['default']['HOST'] = "172.18.0.1"
+
+CORS_ORIGIN_ALLOW_ALL = True
