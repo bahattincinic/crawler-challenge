@@ -105,10 +105,20 @@ class CrawlerDataImport(object):
         instance.html_content = item.content
         instance.image = item.image
         instance.name = item.name
-        instance.save()
 
         return instance
 
     def execute(self, products: List[CrawlerResponse]) -> None:
+        create, update = [], []
+
         for item in products:
-            self.process_item(item)
+            instance = self.process_item(item)
+            if instance.id:
+                update.append(instance)
+            else:
+                create.append(instance)
+
+        Product.objects.bulk_create(create)
+
+        for instance in update:
+            instance.save()
