@@ -83,9 +83,13 @@ WSGI_APPLICATION = 'crawler.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'crawler',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
 
 
@@ -136,3 +140,8 @@ MEDIA_ROOT = normpath(join(CRAWLER_ROOT, 'media'))
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
+
+CRAWLER_ENDPOINTS: List[str] = [
+    'https://www.sony.com/electronics/tv/t/televisions',
+    'https://www.sony.com/electronics/headphones/t/headband-headphones'
+]

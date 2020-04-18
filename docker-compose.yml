@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  djangoapp:
+    build: ./backend
+    restart: on-failure
+    container_name: djangoapp
+    links:
+      - db
+    ports:
+      - 8000:8000
+    volumes:
+      - "./backend:/crawler"
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    tty: true
+    stdin_open: true
+
+  db:
+    image: postgres:11.5
+    container_name: db
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "crawler"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.docker/postgres:/var/lib/postgres
