@@ -1,6 +1,7 @@
+from os.path import abspath, dirname, join, normpath
 from sys import path
-from os.path import dirname, abspath, normpath, join
 from typing import List
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))

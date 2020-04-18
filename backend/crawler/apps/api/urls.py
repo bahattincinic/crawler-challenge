@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from .views import ProductViewSet, CompareViewSet
+from .views import CompareViewSet, ProductViewSet
 
 
 router = routers.DefaultRouter()

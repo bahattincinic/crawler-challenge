@@ -1,13 +1,12 @@
 import asyncio
 import itertools
-from typing import List, Dict
 from dataclasses import dataclass
-
-import aiohttp
-
-from bs4 import BeautifulSoup
+from typing import Dict, List
 
 from django.conf import settings
+
+import aiohttp
+from bs4 import BeautifulSoup
 
 from products.models import Product
 

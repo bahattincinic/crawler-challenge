@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from html_similarity import similarity
-
 from api.serializers import CompareSerializer
+from html_similarity import similarity
 from products.models import Product
+
 from .serializers import ProductSerializer
 
 
