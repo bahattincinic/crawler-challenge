@@ -38,7 +38,7 @@ const Compare = () => {
   return (
     <div>
       <div className="Products-header">
-        <Header as='h1'>Compare</Header>
+        <Header as='h1'>Compare HTML Results</Header>
 
         <Form>
           <Form.Select

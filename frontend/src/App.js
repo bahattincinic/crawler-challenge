@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { Container, Menu } from 'semantic-ui-react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link
@@ -13,25 +12,23 @@ function App() {
   return (
     <Fragment>
       <Container>
-        <Router>
-            <Menu>
-              <Menu.Item as={Link} to='/'>
-                Home
-              </Menu.Item>
-              <Menu.Item as={Link} to='/compare'>
-                Compare
-              </Menu.Item>
-            </Menu>
+          <Menu>
+            <Menu.Item as={Link} to='/'>
+              Home
+            </Menu.Item>
+            <Menu.Item as={Link} to='/compare'>
+              Compare
+            </Menu.Item>
+          </Menu>
 
-            <Switch>
-              <Route path="/compare">
-                <Compare />
-              </Route>
-              <Route path="/">
-                <Products />
-              </Route>
-            </Switch>
-        </Router>
+          <Switch>
+            <Route path="/compare">
+              <Compare />
+            </Route>
+            <Route path="/">
+              <Products />
+            </Route>
+          </Switch>
       </Container>
     </Fragment>
   );
