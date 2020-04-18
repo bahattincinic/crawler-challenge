@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 backend/crawler/settings/dev.py
+backend/crawler/media
 
 .idea
