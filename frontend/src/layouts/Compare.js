@@ -1,8 +1,8 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import { Header, Form } from 'semantic-ui-react';
-import useProduct from "../hooks/useProduct";
-import useFormFields from "../hooks/useFormFields";
-import {apiDomain} from "../config";
+import useProduct from '../hooks/useProduct';
+import useFormFields from '../hooks/useFormFields';
+import useCompare from '../hooks/useCompare';
 
 const Compare = () => {
   const products = useProduct();
@@ -12,28 +12,14 @@ const Compare = () => {
     }
   });
 
-  const [similarity, setSimilarity] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
   const [fields, handleFieldChange] = useFormFields({
     from_product: "",
     to_product: ""
   });
 
-  const onSubmit = useCallback(() => {
-    const params = {
-      body: JSON.stringify(fields),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-    };
-    setIsLoading(true);
-    fetch(`${apiDomain}/api/v1/compare/`, params)
-      .then(response => response.json())
-      .then(json => setSimilarity(json.similarity))
-      .finally(() => setIsLoading(false));
-  }, [fields]);
+  const {
+    similarity
+  } = useCompare(fields);
 
   return (
     <div>
@@ -57,10 +43,6 @@ const Compare = () => {
             value={fields.to_product}
             onChange={handleFieldChange}
           />
-          <Form.Button onClick={onSubmit}
-                       disabled={!(fields.to_product && fields.from_product) || isLoading}>
-            Get Similarity
-          </Form.Button>
         </Form>
       </div>
 
