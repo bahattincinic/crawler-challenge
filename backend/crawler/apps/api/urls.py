@@ -1,10 +1,11 @@
 from rest_framework import routers
 
-from .views import ProductViewSet
+from .views import ProductViewSet, CompareViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'products', ProductViewSet)
+router.register(r'compare', CompareViewSet)
 
 
 urlpatterns = router.urls

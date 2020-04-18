@@ -9,3 +9,12 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id', 'name', 'image',
                   'remote_url', 'created_at', 'updated_at',)
+
+
+class CompareSerializer(serializers.Serializer):
+    from_product = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all()
+    )
+    to_product = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all()
+    )
