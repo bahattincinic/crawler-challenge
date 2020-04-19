@@ -1,0 +1,60 @@
+name: Python application
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: crawler
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -r requirements/test.txt
+        python manage.py migrate
+    - name: Check PEP-8
+      run: |
+        cd backend
+        pycodestyle . --exclude="*/migrations/*,env/*"
+    - name: Check Dependencies Vulnerability (safety)
+      run: |
+        cd backend
+        safety check --bare --full-report
+    - name: Static Typing Check (mypy)
+      run: |
+        cd backend
+        mypy .
+    - name: AST-based Static Analyzer Check (bandit)
+      run: |
+        cd backend
+        bandit -r .
+    - name: Django Check
+      run: |
+        cd backend
+        python manage.py check
+    - name: Run Backend Tests
+      run: |
+        cd backend
+        python manage.py test
