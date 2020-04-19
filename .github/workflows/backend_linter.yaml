@@ -31,6 +31,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd backend
+        cp crawler/settings/test.py-dist crawler/settings/dev.py
         python -m pip install --upgrade pip
         pip install -r requirements/test.txt
         python manage.py migrate
