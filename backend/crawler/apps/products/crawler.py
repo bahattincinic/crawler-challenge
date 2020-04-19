@@ -1,9 +1,6 @@
 import asyncio
-import itertools
 from dataclasses import dataclass
 from typing import Dict, List
-
-from django.conf import settings
 
 import aiohttp
 from bs4 import BeautifulSoup
@@ -65,24 +62,18 @@ class Crawler(object):
             image=f'https:{image}'
         )
 
-    def execute(self) -> List[CrawlerResponse]:
+    def execute(self, category_url: str) -> List[CrawlerResponse]:
         loop = asyncio.get_event_loop()
 
         # fetch product links
-        urls_task, _ = loop.run_until_complete(asyncio.wait([
+        detail_urls: List[str] = loop.run_until_complete(
             self._fetch_category_links(category_url)
-            for category_url in settings.CRAWLER_ENDPOINTS
-        ]))
-
-        flatten_urls: List[str] = list(itertools.chain.from_iterable([
-            url_task.result()
-            for url_task in urls_task
-        ]))
+        )
 
         # fetch product contents
         products, _ = loop.run_until_complete(asyncio.wait([
             self._fetch_product(url)
-            for url in flatten_urls
+            for url in detail_urls
         ]))
 
         loop.close()

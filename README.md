@@ -41,7 +41,15 @@ $ python manage.py migrate
 Import data with crawler
 
 ```
-$ python manage.py crawl_products
+$ docker exec -it djangoapp bash
+
+$ python manage.py crawl_products --help
+    usage: manage.py crawl_products [-h] [--category-url CATEGORY_URL] [--version]
+                                [-v {0,1,2,3}] [--settings SETTINGS]
+                                [--pythonpath PYTHONPATH] [--traceback]
+                                [--no-color] [--force-color] [--skip-checks]
+
+$ python manage.py crawl_products --category-url=https://example.com/category/list
 ```
 
 Open http://localhost:3000

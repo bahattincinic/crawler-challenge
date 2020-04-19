@@ -152,8 +152,3 @@ MEDIA_ROOT = normpath(join(CRAWLER_ROOT, 'media'))
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
-
-CRAWLER_ENDPOINTS: List[str] = [
-    'https://www.sony.com/electronics/tv/t/televisions',
-    'https://www.sony.com/electronics/headphones/t/headband-headphones'
-]
