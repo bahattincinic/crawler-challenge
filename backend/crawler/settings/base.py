@@ -157,4 +157,3 @@ CRAWLER_ENDPOINTS: List[str] = [
     'https://www.sony.com/electronics/tv/t/televisions',
     'https://www.sony.com/electronics/headphones/t/headband-headphones'
 ]
-
