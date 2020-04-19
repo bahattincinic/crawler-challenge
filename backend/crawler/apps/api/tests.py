@@ -12,7 +12,10 @@ class ProductsAPITestCase(TestCase):
         response = self.client.get('/api/v1/products/')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), Product.objects.count())
+        self.assertEqual(
+            len(response.data),  # type: ignore
+            Product.objects.count()
+        )
 
 
 class CompareAPITestCase(TestCase):
@@ -42,7 +45,9 @@ class CompareAPITestCase(TestCase):
         }, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['similarity'], 1)
+        self.assertEqual(
+            response.data['similarity'], 1  # type: ignore
+        )
 
     def test_invalid_product(self):
         response = self.client.post('/api/v1/compare/', {
