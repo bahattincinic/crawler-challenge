@@ -70,6 +70,9 @@ class Crawler(object):
             self._fetch_category_links(category_url)
         )
 
+        if not detail_urls:
+            return []
+
         # fetch product contents
         products, _ = loop.run_until_complete(asyncio.wait([
             self._fetch_product(url)
