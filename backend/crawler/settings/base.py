@@ -133,6 +133,11 @@ USE_L10N = True
 USE_TZ = True
 
 
+FIXTURE_DIRS = (
+    normpath(join(CRAWLER_ROOT, 'fixtures')),
+)
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
